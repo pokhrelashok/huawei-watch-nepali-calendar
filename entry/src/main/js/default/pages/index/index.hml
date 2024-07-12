@@ -1,30 +1,43 @@
 <div class="wrapper">
-    <div class="container" style="background-color: #27ae60;" if="{{day=='Saturday'}}">
-        <text class="title">
-            {{ day }}
-        </text>
-        <text class="title">
-            {{ adDate }}
-        </text>
-        <text class="title">
-            {{bsDate}}
-        </text>
-        <text if="{{ event.length>0 }}" class="event">
-            {{event}}
-        </text>
-    </div>
-    <div class="container" style="background-color: black;" else>
-        <text class="title">
-            {{ day }}
-        </text>
-        <text class="title">
-            {{ adDate }}
-        </text>
-        <text class="title">
-            {{bsDate}}
-        </text>
-        <text if="{{ event.length>0 }}" class="event">
-            {{event}}
-        </text>
-    </div>
+    <swiper on:change="swipeEvent" onswipe="closeApp" class="swiper" id="swiper" index="0" indicator="true" loop="false" digital="true" cachedsize="-1">
+        <div class="content">
+            <div class="container">
+                <text class="title">
+                    {{ day }}
+                </text>
+                <text class="title">
+                    {{ adDate }}
+                </text>
+                <text class="title">
+                    {{bsDate}}
+                </text>
+                <text if="{{ event.length>0 }}" class="event">
+                    {{event}}
+                </text>
+            </div>
+        </div>
+        <div  class="content">
+                    <swiper  class="swiper" id="swiper" vertical="true" index="0" loop="false" digital="true" cachedsize="-1">
+        <div for="{{nextEvents}}" tid="date" class="content">
+            <div class="container">
+                <text if="{{$idx==0}}" class="title">
+                    Next Events:
+                </text>
+                <text class="title">
+                    {{ $item.date }}
+                </text>
+                <text class="title">
+                    {{ $item.event }}
+                </text>
+            </div>
+        </div>
+        </swiper>
+<!--                <text class="title">-->
+<!--                    {{ nextEvent.date }}-->
+<!--                </text>-->
+<!--                <text class="title">-->
+<!--                    {{nextEvent.title}}-->
+<!--                </text>-->
+        </div>
+    </swiper>
 </div>

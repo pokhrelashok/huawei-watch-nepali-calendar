@@ -1,3 +1,6 @@
+import app from '@system.app';
+import brightness from '@system.brightness';
+
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const bsCalendarData = {
     2081: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31],
@@ -46,19 +49,50 @@ function convertADToBS(adDate) {
 }
 
 const MajorEvents = {
-    '2081-05-03': "Raksha Bandhan"
+    '2081-05-03': "Raksha Bandhan",
+    '2081-05-04': "Gaijatra",
+    '2081-05-10': "Krishna Janmasthami",
+    '2081-05-21': "Teej",
+    '2081-06-17': "Ghatasthapana",
+    '2081-06-26': "Vijaya Dashami",
+    '2081-07-15': "Laxmi Puja",
+    '2081-07-18': "Vai Tika",
+    '2081-07-22': "Chhath",
+    '2081-09-01': "Maghe Sankranti",
+    '2081-11-14': "Maha Shivaratri",
+    '2081-12-01': "Fagu Purnima",
 };
-
 export default {
     data: {
         bsDate: "",
         adDate: "",
         day: "",
         event: "",
-        pageIndex: 0,
-        pages: ['home', 'next-event'],
+        nextEvents:[],
+        currentPage:0,
+    },
+    swipeEvent(e) {
+        if('index' in e){
+            this.currentPage = e.index
+            console.log(e.index)
+            setTimeout(this.closeApp,200);
+        }
+    },
+    closeApp(e) {
+        if(this.currentPage == 0 && e&& e.direction=='right'){
+            console.log("Terminating")
+            app.terminate();
+        }
     },
     onInit() {
+        brightness.getValue({
+            success: function(data){
+                console.log('success get brightness value:' + data.value);
+            },
+            fail: function(data, code) {
+                console.log('get brightness fail, code: ' + code + ', data: ' + data);
+            },
+        });
         const today = new Date();
         const adYear = today.getFullYear();
         const adMonth = today.getMonth() + 1;
@@ -69,15 +103,37 @@ export default {
         this.adDate = adDate;
         this.bsDate = `${bsDate.year}-${bsDate.month}-${bsDate.day}`;
         this.event = this.bsDate in MajorEvents ? MajorEvents[this.bsDate] : ''
-    },
-    swipeEvent(e) {
-        if (e.direction == "right") {
-            app.terminate();
-        }
-    },
-    showValue() {
-        this.showValue = !this.showValue;
-    },
-    onDestroy() { },
-}
 
+        let searchingForMonth = parseInt(bsDate.month);
+        let searchingForDate = parseInt(bsDate.day);
+        let iterations = 0;
+        let nextEvent = null;
+        let nextEvents = [];
+        while(iterations<300){
+            if(searchingForDate==0) {
+                searchingForMonth++;
+                searchingForDate =(searchingForDate+1)%32;
+                continue;
+            }
+            const key =`${bsDate.year}-${searchingForMonth < 10 ? '0' + searchingForMonth.toString() : searchingForMonth}-${searchingForDate < 10 ? '0' + searchingForDate.toString() : searchingForDate}`;
+            if (key in MajorEvents){
+                nextEvent =key
+                break;
+            }
+            iterations++;
+            searchingForDate =(searchingForDate+1)%32;
+        }
+
+        if(!nextEvent) return;
+        let nextEventIndex = 0;
+        let dates = Object.keys(MajorEvents);
+        for (let i=0;i<dates.length;i++){
+            if(dates[i] == nextEvent) nextEventIndex=i;
+        }
+        dates = dates.splice(nextEventIndex);
+        for(let i=0;i<10 && i<dates.length;i++){
+            nextEvents.push({date:dates[i],event:MajorEvents[dates[i]]});
+        }
+        this.nextEvents = nextEvents;
+    },
+}
