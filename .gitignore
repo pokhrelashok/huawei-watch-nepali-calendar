@@ -12,3 +12,7 @@
 /.clangd
 /.clang-format
 /.clang-tidy
+*.p12
+*.csr
+*.cer
+*.p7b
