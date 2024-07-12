@@ -1,0 +1,44 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.huawei.ohos.app'
+
+//For instructions on signature configuration, see https://developer.harmonyos.com/en/docs/documentation/doc-guides-V3/ide_debug_device-0000001053822404-V3#section1112183053510
+ohos {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\pokhrelashok2\\DevEcoStudioProjects\\Patro\\Patro.p12')
+            storePassword '0000001FA45A6A10338F271EDB947D6D587312F234405401C89194FD4E20749CA1054B02F9611FF366B9689A0B8349'
+            keyAlias = 'Patro'
+            keyPassword '0000001F5B7E006D981335C08BCE3B2ABB572BD6F011E1DF81D8651DBA544432618426A50EF395437D365481BCB959'
+            signAlg = 'SHA256withECDSA'
+            profile file('C:\\Users\\pokhrelashok2\\Downloads\\DebugDebug.p7b')
+            certpath file('C:\\Users\\pokhrelashok2\\Downloads\\Patro.cer')
+        }
+    }
+    compileSdkVersion 7
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+    }
+    dependencies {
+        classpath 'com.huawei.ohos:hap:3.1.5.0'
+        classpath 'com.huawei.ohos:decctest:1.2.7.20'
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+    }
+}

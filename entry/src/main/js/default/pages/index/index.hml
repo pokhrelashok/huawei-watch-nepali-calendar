@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="container" style="background-color: #27ae60;" if="{{day=='Saturday'}}">
+        <text class="title">
+            {{ day }}
+        </text>
+        <text class="title">
+            {{ adDate }}
+        </text>
+        <text class="title">
+            {{bsDate}}
+        </text>
+        <text if="{{ event.length>0 }}" class="event">
+            {{event}}
+        </text>
+    </div>
+    <div class="container" style="background-color: black;" else>
+        <text class="title">
+            {{ day }}
+        </text>
+        <text class="title">
+            {{ adDate }}
+        </text>
+        <text class="title">
+            {{bsDate}}
+        </text>
+        <text if="{{ event.length>0 }}" class="event">
+            {{event}}
+        </text>
+    </div>
+</div>

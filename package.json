@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@sbmdkl/nepali-date-converter": "^2.0.3",
+    "nepali-date-converter": "^3.3.2",
+    "nepali-datetime": "^1.2.1"
+  }
+}
