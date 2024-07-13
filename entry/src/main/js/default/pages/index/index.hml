@@ -10,13 +10,13 @@
             </text>
          </div>
          <div class="bottom-half">
-            <text style="color: #405D72;font-size: 40px;" class="title day">
+            <text style="color: #EEEDEB;font-size: 40px;" class="title day">
                {{ dayNepali }}
             </text>
-            <text style="color: #405D72;font-size: 55px;" class="title">
+            <text style="color: #EEEDEB;font-size: 50px;" class="title">
                {{bsDate}}
             </text>
-            <text style="color: #405D72;" if="{{ event.length>0 }}" class="event">
+            <text style="color: #EEEDEB;" if="{{ event.length>0 }}" class="event">
                {{event}}
             </text>
          </div>

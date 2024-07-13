@@ -20,15 +20,15 @@
 
 .top-half{
     width: 100%;
-    background-color: #405D72;
+    background-color: black;
     color: #F7E7DC;
 }
 .top-half .title{
-    color: #F7E7DC;
+    color: #EEEDEB;
 }
 .bottom-half{
     width: 100%;
-    background-color: #F7E7DC;
+    background-color: #151515;
 }
 .container {
     width: 100%;
@@ -49,8 +49,8 @@
     font-size: 34px;
 }
 .bottom-half .title{
-    color: #405D72;
+    color: #EEEDEB;
 }
 .events{
-    background-color: #405D72;
+    background-color: black;
 }
