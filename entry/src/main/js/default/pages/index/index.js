@@ -122,7 +122,7 @@ export default {
                 this.event = event.title;
             }
             if (eventDate > today || isToday) {
-                const bsDate = convertADToBS(event.date);
+                const bsDate = convertADToBS(eventDate);
                 const after =Math.floor(Math.abs(eventDate - today) / (1000 * 60 * 60 * 24));
                 this.nextEvents.push({ ...event, day: DAY_NAMES_NEPALI[eventDate.getDay()], bs: convertToNepaliDigits(`${bsDate.year}-${bsDate.month}-${bsDate.day}`), after,afterNepali:convertToNepaliDigits(after.toString()) });
             }
